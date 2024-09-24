@@ -1,0 +1,258 @@
+<head>
+   <meta charset="UTF-8">
+   <link rel="icon" type="image/png" href="https://i.ibb.co/tDNcdWX/saturn-svgrepo-com.png" alt="saturn-svgrepo-com" border="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Planato - Explore the Planets</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+
+<style>
+ 
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Handlee&display=swap');
+
+  #loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color:#1EEC81;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+
+  font-family: 'Anton', cursive;
+}
+ .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #2d3748;
+            color: #edf2f7;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease-in-out;
+        }
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        .menu-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #4a5568;
+            color: #edf2f7;
+            padding: 12px;
+            border-radius: 10px 0;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        .close-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background-color: #e53e3e;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .planet-card img {
+            transition: transform 0.3s ease;
+        }
+        .planet-card:hover img {
+            transform: scale(1.1);
+        }
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px 0;
+        }
+        .modal-content {
+            background-color: #1a202c;
+            padding: 20px;
+            border-radius: 10px 0;
+            color: white;
+            max-width: 500px;
+            text-align: center;
+        }
+
+</style>
+</head>
+<body class="bg-gray-900 text-white">
+
+<div id="loading-screen">
+  Downloading Assets ! 
+
+</div>
+<div id="main-menu" style="display: none;">
+ <div class="menu-button" id="menuButton">
+        ☰
+    </div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="close-button" id="closeButton">
+            ✕
+        </div>
+        <h1 class="text-3xl font-bold mb-8 text-center mt-10">Planeto</h1>
+        <ul class="space-y-4 px-4">
+            <li class="text-xl hover:text-purple-400 transition"><a href="#">Mercury</a></li>
+            <li class="text-xl hover:text-purple-400 transition"><a href="#">Venus</a></li>
+            <li class="text-xl hover:text-purple-400 transition"><a href="#">Earth</a></li>
+            <li class="text-xl hover:text-purple-400 transition"><a href="#">Mars</a></li>
+            <li class="text-xl hover:text-purple-400 transition"><a href="#">Jupiter</a></li>
+            <li class="text-xl hover:text-purple-400 transition"><a href="#">Saturn</a></li>
+            <li class="text-xl hover:text-purple-400 transition"><a href="#">Uranus</a></li>
+            <li class="text-xl hover:text-purple-400 transition"><a href="#">Neptune</a></li>
+        </ul>
+    </nav>
+
+    <!-- Content Area -->
+    <div id="welcome-screen">
+        <div class="flex-1 p-10 pt-20">
+            <h2 class="text-4xl md:text-6xl mb-8 text-center font-semibold">Planeto</h2>
+        </div>
+        <div id="planet-display" class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="planet-card p-6 bg-purple-600 rounded-lg shadow-lg text-center cursor-pointer" data-planet="Mercury">
+                <img src="https://i.ibb.co/12FCJk8/mercury-png-by-heroys-d7xz2f1.png" alt="Mercury" class="w-28 h-28 mx-auto">
+                <h3 class="mt-4 text-xl font-bold">Mercury</h3>
+            </div>
+            <!-- Continue for other planets -->
+            <div class="planet-card p-6 bg-blue-600 rounded-lg shadow-lg text-center cursor-pointer" data-planet="Venus">
+                <img src="https://i.ibb.co/jy2JtFD/R-1.png" alt="Venus" class="w-28 h-28 mx-auto">
+                <h3 class="mt-4 text-xl font-bold">Venus</h3>
+            </div>
+            <div class="planet-card p-6 bg-green-600 rounded-lg shadow-lg text-center cursor-pointer" data-planet="Earth">
+                <img src="https://i.ibb.co/6R8DkLX/OIP-9-removebg-preview.png" alt="Earth" class="w-28 h-28 mx-auto">
+                <h3 class="mt-4 text-xl font-bold">Earth</h3>
+            </div>
+            <div class="planet-card p-6 bg-red-600 rounded-lg shadow-lg text-center cursor-pointer" data-planet="Mars">
+                <img src="https://i.ibb.co/Nps3m1K/R-2.png" alt="Mars" class="w-28 h-28 mx-auto">
+                <h3 class="mt-4 text-xl font-bold">Mars</h3>
+            </div>
+            <div class="planet-card p-6 bg-yellow-600 rounded-lg shadow-lg text-center cursor-pointer" data-planet="Jupiter">
+                <img src="https://i.ibb.co/SJ6dmMR/R-3.png" alt="Jupiter" class="w-28 h-28 mx-auto">
+                <h3 class="mt-4 text-xl font-bold">Jupiter</h3>
+            </div>
+            <div class="planet-card p-6 bg-orange-600 rounded-lg shadow-lg text-center cursor-pointer" data-planet="Saturn">
+                <img src="https://i.ibb.co/2WVMRk0/OIP-10-removebg-preview.png" alt="Saturn" class="w-28 h-28 mx-auto">
+                <h3 class="mt-4 text-xl font-bold">Saturn</h3>
+            </div>
+            <div class="planet-card p-6 bg-indigo-600 rounded-lg shadow-lg text-center cursor-pointer" data-planet="Uranus">
+                <img src="https://i.ibb.co/L5F1YtK/R-4.png" alt="Uranus" class="w-28 h-28 mx-auto">
+                <h3 class="mt-4 text-xl font-bold">Uranus</h3>
+            </div>
+            <div class="planet-card p-6 bg-teal-600 rounded-lg shadow-lg text-center cursor-pointer" data-planet="Neptune">
+                <img src="https://i.ibb.co/JRkCFh6/R-5.png" alt="Neptune" class="w-28 h-28 mx-auto">
+                <h3 class="mt-4 text-xl font-bold">Neptune</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="planetModal" class="modal flex">
+        <div class="modal-content">
+            <h3 class="text-2xl font-bold" id="modal-planet-name">Planet Name</h3>
+            <p id="modal-planet-description" class="mt-4"></p>
+            <button id="closeModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">Close</button>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+   const menuButton = document.getElementById('menuButton');
+        const closeButton = document.getElementById('closeButton');
+        const sidebar = document.getElementById('sidebar');
+        const modal = document.getElementById('planetModal');
+        const modalPlanetName = document.getElementById('modal-planet-name');
+        const modalPlanetDescription = document.getElementById('modal-planet-description');
+        const closeModalButton = document.getElementById('closeModal');
+
+        const planetInfo = {
+            Mercury: {
+                name: "Mercury",
+                description: "Mercury is the smallest planet in our solar system. It’s just a little bigger than Earth's Moon."
+            },
+            Venus: {
+                name: "Venus",
+                description: "Venus is the second planet from the Sun and is Earth’s closest planetary neighbor."
+            },
+             Earth: {
+                name: "Earth",
+                description: "Earth, third planet from the Sun and the fifth largest planet in the solar system in terms of size and mass. Its single most outstanding feature is that its near-surface environments are the only places in the universe known to harbour life. It is designated by the symbol ♁. Earth’s name in English, the international language of astronomy, derives from Old English and Germanic words for ground and earth, and it is the only name for a planet of the solar system that does not come from Greco-Roman mythology. Earth is part of theobservable universe  the region of space that humans can actually or theoretically observe with the aid of technology. Unlike the observable universe, the universe is possibly infinite."
+            },
+             Mars: {
+                name: "Mars",
+                description: "Mars is the fourth planet from the Sun. The surface of Mars is orange-red because it is covered in iron(III) oxide dust, giving it the nickname the Red Planet.[22][23] Mars is among the brightest objects in Earth's sky, and its high-contrast albedo features have made it a common subject for telescope viewing. It is classified as a terrestrial planet and is the second smallest of the Solar System's planets with a diameter of 6,779 km (4,212 mi). In terms of orbital motion, a Martian solar day (sol) is equal to 24.5 hours, and a Martian solar year is equal to 1.88 Earth years (687 Earth days). Mars has two natural satellites that are small and irregular in shape: Phobos and Deimos."
+            },
+             Jupiter: {
+                name: "Jupiter",
+                description: "Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass more than 2.5 times that of all the other planets in the Solar System combined and slightly less than one-thousandth the mass of the Sun. Its diameter is eleven times that of Earth, and a tenth that of the Sun. Jupiter orbits the Sun at a distance of 5.20 AU (778.5 Gm), with an orbital period of 11.86 years. It is the third brightest natural object in the Earth's night sky, after the Moon and Venus, and has been observed since prehistoric times. Its name derives from that of Jupiter, the chief deity of ancient Roman religion."
+            },
+            Saturn: {
+                name: "Saturn",
+                description: "Saturn is the sixth planet from the Sun and the second largest in the Solar System, after Jupiter. It is a gas giant, with an average radius of about nine times that of Earth.[27][28] It has an eighth the average density of Earth, but is over 95 times more massive.[29][30][31] Even though Saturn is almost as big as Jupiter, Saturn has less than a third the mass of Jupiter. Saturn orbits the Sun at a distance of 9.59 AU (1,434 million km), with an orbital period of 29.45 years."
+            },
+             Uranus: {
+                name: "Uranus",
+                description: "Uranus is the seventh planet from the Sun. It is a gaseous cyan-coloured ice giant. Most of the planet is made of water, ammonia, and methane in a supercritical phase of matter, which astronomy calls ice or volatiles. The planet's atmosphere has a complex layered cloud structure and has the lowest minimum temperature (49 K (−224 °C; −371 °F)) of all the Solar System's planets. It has a marked axial tilt of 82.23° with a retrograde rotation period of 17 hours and 14 minutes. This means that in an 84-Earth-year orbital period around the Sun, its poles get around 42 years of continuous sunlight, followed by 42 years of continuous darkness."
+            },
+             Neptune: {
+                name: "Neptune",
+                description: "Neptune is the eighth and farthest known planet from the Sun. It is the fourth-largest planet in the Solar System by diameter, the third-most-massive planet, and the densest giant planet. It is 17 times the mass of Earth and slightly more massive, but denser and smaller, than fellow ice giant Uranus. Being composed primarily of gases and liquids,[21] it has no well-defined solid surface, and orbits the Sun once every 164.8 years at an orbital distance of 30.1 astronomical units (4.5 billion kilometres; 2.8 billion miles). It is named after the Roman god of the sea and has the astronomical symbol ♆, representing Neptune's trident.[e]"
+            },
+          }
+
+      menuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        closeButton.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+        });
+
+        // Open modal with planet details
+        const planetCards = document.querySelectorAll('.planet-card');
+        planetCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const planet = card.getAttribute('data-planet');
+                modalPlanetName.textContent = planetInfo[planet].name;
+                modalPlanetDescription.textContent = planetInfo[planet].description;
+                modal.style.display = 'flex';
+            });
+        });
+
+        // Close modal
+        closeModalButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside modal content
+        window.addEventListener('click', (e) => {
+            if (e.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+  window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('main-menu').style.display = 'block';
+  }, 3000); // Delay of 3 seconds (3000 ms)
+});
+
+</script> 
+</body>

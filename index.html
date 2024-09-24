@@ -1,0 +1,118 @@
+<!-- Created by astroparrot🦜🍁 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/tDNcdWX/saturn-svgrepo-com.png" alt="saturn-svgrepo-com" border="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+    <title>3D Loading Screen</title>
+    
+</head>
+<body>
+<style>
+    /* Created by astroparrot🦜🍁 */
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #282c34;
+    font-family: 'Handlee', cursive;
+}
+
+.loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cube {
+    width: 100px;
+    height: 100px;
+    background-color: #61dafb;
+    transform-style: preserve-3d;
+    animation: rotate 2s infinite linear;
+    position: relative;
+}
+
+.cube::before,
+.cube::after,
+.cube div {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color:#61dafb;
+    border: 2px solid #fff;
+}
+
+.cube::before {
+    transform: rotateY(90deg) translateZ(50px);
+}
+
+.cube::after {
+    transform: rotateY(-90deg) translateZ(50px);
+}
+
+.cube div {
+    transform: rotateX(90deg) translateZ(50px);
+}
+
+.cube div:nth-child(1) {
+    background-color: #ff6347;
+}
+
+.cube div:nth-child(2) {
+    background-color: #32cd32;
+}
+
+.cube div:nth-child(3) {
+    background-color: #ffa500;
+}
+
+.cube div:nth-child(4) {
+    background-color: #9370db;
+}
+
+.loading-text {
+    margin-top: 60px;
+    color: #fff;
+    font-size: 24px;
+    animation: fade 1.5s infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateX(89) rotateY(9);
+    }
+    100% {
+        transform: rotateX(30deg) rotateY(390deg);
+    }
+}
+
+@keyframes fade {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 10;
+    }
+}
+
+</style>
+    <div class="loading-screen">
+        <div class="cube"></div>
+        <div class="loading-text">Planeto v1</div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            window.location.href = 'div.html'; // Redirect to the welcome screen after 4 seconds
+        }, 4000); // 4000 milliseconds = 4 seconds
+    </script>
+</body>
+</html>
